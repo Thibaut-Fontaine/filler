@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/27 11:23:43 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/27 11:26:37 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,5 @@
 #include <string.h>
 #include <errno.h>
 #include <stdio.h>
-
-
 
 #endif
