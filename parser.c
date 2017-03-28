@@ -6,11 +6,38 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/28 18:42:59 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:23:10 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./filler.h"
+
+/*
+** if the reading line is the '$$$ exec', it will return 'O' or 'X'
+** return -1 if error if its not the $$$exec line
+*/
+
+char			get$$$execline()
+{
+	int			ret;
+	char		*line;
+	char		*tofree;
+	char		r;
+
+	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
+		return (-1);
+	tofree = line;
+	if (ft_strcmp(line, "$$$ exec p") == 0)
+		line += 10;
+	else
+	{
+		free(tofree);
+		return (-1);
+	}
+	r = *line + '0';
+	free(tofree);
+	return (r);
+}
 
 /*
 ** take the 2nd line of the input
@@ -58,22 +85,10 @@ char			**fill_memory(size_t y, size_t x)
 	split[y] = NULL;
 	while (k < y && (ret = get_next_line(INPUT, &(split[k]))) > 0
 			&& ft_strlen(split[k]) == x)
-	{
-		dprintf(fd, "-> %s <-\n", split[k]);
 		++k;
-	}
 	if (ret == -1 || k != y - 1)
 		return (NULL);
 	return (split);
-}
-
-void		ggg(char **argv)// delete that
-{
-	while (argv != NULL)
-	{
-		dprintf(fd, "~ %s ~\n", *argv);
-		++argv;
-	}
 }
 
 int				parse_input()
@@ -81,7 +96,7 @@ int				parse_input()
 	char		*line;
 	int			ret;
 	t_size		sz;
-	char		**array;
+	//char		**array;
 
 	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
 		return (-1);
@@ -95,8 +110,9 @@ int				parse_input()
 	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
 		return (-1);
 	free(line);
-	if ((array = fill_memory(sz.y, sz.x)) == NULL)
-		return (-1);
-	ggg(array);
+	//if ((array = fill_memory(sz.y, sz.x)) == NULL)
+	//	return (-1);
+	//ggg(array);
+	dprintf(fd, "%d ~ %d\n", sz.y, sz.x);
 	return (0);
 }
