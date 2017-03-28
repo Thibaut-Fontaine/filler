@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/28 17:08:42 by tfontain         ###   ########.fr       */
+/*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
+/*   Updated: 2017/03/28 17:12:21 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./filler.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
-int			main()
+t_size			getsize(const char *s)
 {
-	int		fd;
+	t_size		sz;
 
-	fd = open("./ccc.txt", O_RDWR, S_IRWXO);
-	
+
+	return (sz);
+}
+
+fill_memory()
+{
 	char	*line;
 
-	while (get_next_line(0, &line))
+	while (get_next_line(0, &line) && line != )
 	{
-		dprintf(fd, "%s", line);
 		free(line);
 	}
+	
+}
+
+int		parse_input()
+{
 	return (0);
 }
