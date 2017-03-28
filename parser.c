@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/28 20:05:15 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/28 22:33:03 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** return NULL if error occured
 */
 
-char			*get$$$execline()
+char			*getexecline()
 {
 	int			ret;
 	char		*line;
@@ -39,8 +39,9 @@ char			*get$$$execline()
 	c = *line;
 	free(tmp);
 	tmp = malloc(2);
-	tmp[0] = c == '1' ? 'O' : 'X';
+	tmp[0] = (c == '1' ? 'O' : 'X');
 	tmp[1] = 0;
+	dprintf(fd, "%s", tmp);
 	return (tmp);
 }
 
@@ -112,7 +113,7 @@ int				parse_input()
 	char		c;
 	//char		**array;
 
-	if (*(line = get$$$execline()) == 'O' || *line == 'X')
+	if (*(line = getexecline()) == 'O' || *line == 'X')
 	{
 		c = *line;
 		dprintf(fd, "puta");
