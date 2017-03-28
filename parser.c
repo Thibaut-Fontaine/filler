@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/28 19:51:54 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/28 20:05:15 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,14 @@ char			**fill_memory(size_t y, size_t x)
 	return (split);
 }
 
+int				err()//
+{
+	static int	i = 0;
+
+	dprintf(fd, "error n.%d\n", i++);
+	return (-1);
+}
+
 int				parse_input()
 {
 	char		*line;
@@ -107,17 +115,17 @@ int				parse_input()
 	if (*(line = get$$$execline()) == 'O' || *line == 'X')
 	{
 		c = *line;
+		dprintf(fd, "puta");
 		free(line);
 		if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-			return (-1);
+			return (err());
 	}
-	
 	sz = getsize(line);
 	free(line);
 	if (sz.x == -1 || sz.y == -1)
-		return (-1);
+		return (err());
 	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-		return (-1);
+		return (err());
 	free(line);
 	//if ((array = fill_memory(sz.y, sz.x)) == NULL)
 	//	return (-1);

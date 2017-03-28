@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/28 19:06:38 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:59:04 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int			main()
 {
 
-	fd = open("./ccc.txt", O_RDWR, S_IRWXO);
+	fd = open("./ccc.txt", O_TRUNC | O_RDWR | O_CREAT, 0777);
 	
 	parse_input();
 	return (0);
