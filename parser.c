@@ -6,37 +6,42 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/28 19:23:10 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:45:02 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./filler.h"
 
 /*
-** if the reading line is the '$$$ exec', it will return 'O' or 'X'
-** return -1 if error if its not the $$$exec line
+** if the reading line is the '$$$ exec', it will return *'O' or *'X'
+** return the got string if its not the $$$exec line
+** return NULL if error occured
 */
 
-char			get$$$execline()
+char			*get$$$execline()
 {
 	int			ret;
 	char		*line;
-	char		*tofree;
-	char		r;
+	char		*tmp;
+	char		c;
 
-	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-		return (-1);
-	tofree = line;
+	if ((ret = get_next_line(INPUT, &line)) <= 0)
+	{
+		if (ret == 0)
+			free(line);
+		return (NULL);
+	}
+	tmp = line;
 	if (ft_strcmp(line, "$$$ exec p") == 0)
 		line += 10;
 	else
-	{
-		free(tofree);
-		return (-1);
-	}
-	r = *line + '0';
-	free(tofree);
-	return (r);
+		return (tmp);
+	c = *line;
+	free(tmp);
+	tmp = malloc(2);
+	tmp[0] = c == '1' ? 'O' : 'X';
+	tmp[1] = 0;
+	return (tmp);
 }
 
 /*
