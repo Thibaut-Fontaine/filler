@@ -6,7 +6,7 @@
 #    By: tfontain <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/26 14:26:04 by tfontain          #+#    #+#              #
-#    Updated: 2017/03/27 13:59:53 by tfontain         ###   ########.fr        #
+#    Updated: 2017/03/28 17:47:14 by tfontain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = clang
 HEADER = ./filler.h
 FLAG = -Wall -Wextra -Werror -O3
 OPTION = -c -I $(HEADER)
-SRC = ./main.c ./get_next_line.c
+SRC = ./main.c ./get_next_line.c ./parser.c
 
 OBJ = $(addsuffix .o,$(basename $(SRC)))
 
