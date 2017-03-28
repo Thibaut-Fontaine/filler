@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/28 19:45:02 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:51:54 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,17 @@ int				parse_input()
 	char		*line;
 	int			ret;
 	t_size		sz;
+	char		c;
 	//char		**array;
 
-	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-		return (-1);
-	free(line);
-	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-		return (-1);
+	if (*(line = get$$$execline()) == 'O' || *line == 'X')
+	{
+		c = *line;
+		free(line);
+		if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
+			return (-1);
+	}
+	
 	sz = getsize(line);
 	free(line);
 	if (sz.x == -1 || sz.y == -1)
@@ -118,6 +122,6 @@ int				parse_input()
 	//if ((array = fill_memory(sz.y, sz.x)) == NULL)
 	//	return (-1);
 	//ggg(array);
-	dprintf(fd, "%d ~ %d\n", sz.y, sz.x);
+	dprintf(fd, "|%d| |%d| |%c|\n", sz.y, sz.x, c);
 	return (0);
 }
