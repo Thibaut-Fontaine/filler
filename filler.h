@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/30 21:01:00 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/30 22:22:24 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct
 	char		**plateau;
 }				t_array;
 
-t_array				parse_input(void);
+t_array			parse_input(t_array *array);
 char			*getexecline(void);
 
 #endif

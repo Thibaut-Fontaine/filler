@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/30 21:01:38 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/30 22:24:18 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** return NULL if error occured
 */
 
-char			*getexecline()
+char			*getexecline(void)
 {
 	int			ret;
 	char		*line;
@@ -88,41 +88,38 @@ char			**fill_memory(size_t y)
 	return (ret);
 }
 
-t_array			parse_input()
+t_array			parse_input(t_array *array)
 {
 	char		*line;
 	int			ret;
-	char		j;
-	t_array		array;
 
-	array.plateau = NULL;
-	array.piece = NULL;
+	array->plateau = NULL;
+	array->piece = NULL;
 	if ((line = getexecline()) == NULL)
-		return (array);
+		return (*array);
 	else if (*line == 'O' || *line == 'X')
 	{
-		j = *line;
+		array->j = *line;
 		free(line);
 		if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-			return (array);
+			return (*array);
 	}
-	array.szplateau = getsize(line);
+	array->szplateau = getsize(line);
 	free(line);
-	if (array.szplateau.x == -1 || array.szplateau.y == -1)
-		return (array);
+	if (array->szplateau.x == -1 || array->szplateau.y == -1)
+		return (*array);
 	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-		return (array);
+		return (*array);
 	free(line);
-	if ((array.plateau = fill_memory(array.szplateau.y)) == NULL)
-		return (array);
+	if ((array->plateau = fill_memory(array->szplateau.y)) == NULL)
+		return (*array);
 	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-		return (array);
-	array.szpiece = getsize(line);
+		return (*array);
+	array->szpiece = getsize(line);
 	free(line);
-	if (array.szpiece.x == -1 || array.szpiece.y == -1)
-		return (array);
-	if ((array.piece = fill_memory(array.szpiece.y)) == NULL)
-		return (array);
-	array.j = j;
-	return (array);
+	if (array->szpiece.x == -1 || array->szpiece.y == -1)
+		return (*array);
+	if ((array->piece = fill_memory(array->szpiece.y)) == NULL)
+		return (*array);
+	return (*array);
 }
