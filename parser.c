@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/28 22:33:03 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/30 15:49:25 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,18 @@ char			*getexecline()
 	char		c;
 
 	if ((ret = get_next_line(INPUT, &line)) <= 0)
-	{
-		if (ret == 0)
-			free(line);
 		return (NULL);
-	}
 	tmp = line;
-	if (ft_strcmp(line, "$$$ exec p") == 0)
-		line += 10;
-	else
-		return (tmp);
-	c = *line;
-	free(tmp);
+	while (*tmp && ft_strncmp(tmp, "exec p", 6) != 0)
+		++tmp;
+	if (*tmp == 0)
+		return (line);
+	tmp += 6;
+	c = *tmp;
+	free(line);
 	tmp = malloc(2);
 	tmp[0] = (c == '1' ? 'O' : 'X');
 	tmp[1] = 0;
-	dprintf(fd, "%s", tmp);
 	return (tmp);
 }
 
@@ -79,58 +75,65 @@ t_size			getsize(const char *s)
 ** or return NULL if an error occured
 */
 
-char			**fill_memory(size_t y, size_t x)
+char			**fill_memory(size_t y)
 {
-	int			ret;
-	char		**split;
+	char		**ret;
 	size_t		k;
 
-	if ((split = malloc((y + 1) * sizeof(char*))) == NULL)
-		return (NULL);
+	ret = malloc((y + 1) * sizeof(char*));
 	k = 0;
-	split[y] = NULL;
-	while (k < y && (ret = get_next_line(INPUT, &(split[k]))) > 0
-			&& ft_strlen(split[k]) == x)
+	while (y > k)
+	{
+		get_next_line(INPUT, &(ret[k]));
 		++k;
-	if (ret == -1 || k != y - 1)
-		return (NULL);
-	return (split);
+	}
+	ret[k] = NULL;
+	return (ret);
 }
 
-int				err()//
+void	ggg(char **array) //
 {
-	static int	i = 0;
-
-	dprintf(fd, "error n.%d\n", i++);
-	return (-1);
+	while (*array != NULL)
+	{
+		dprintf(fd, "%s\n", *array);
+		array++;
+	}
 }
 
-int				parse_input()
+t_array			parse_input()
 {
 	char		*line;
 	int			ret;
-	t_size		sz;
-	char		c;
-	//char		**array;
+	char		j;
+	t_array		array;
 
-	if (*(line = getexecline()) == 'O' || *line == 'X')
+	array.plateau = NULL;
+	array.piece = NULL;
+	if ((line = getexecline()) == NULL)
+		return (array);
+	else if (*line == 'O' || *line == 'X')
 	{
-		c = *line;
-		dprintf(fd, "puta");
+		j = *line;
 		free(line);
 		if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-			return (err());
+			return (array);
 	}
-	sz = getsize(line);
+	array.szplateau = getsize(line);
 	free(line);
-	if (sz.x == -1 || sz.y == -1)
-		return (err());
+	if (array.szplateau.x == -1 || array.szplateau.y == -1)
+		return (array);
 	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-		return (err());
+		return (array);
 	free(line);
-	//if ((array = fill_memory(sz.y, sz.x)) == NULL)
-	//	return (-1);
-	//ggg(array);
-	dprintf(fd, "|%d| |%d| |%c|\n", sz.y, sz.x, c);
-	return (0);
+	if ((array.plateau = fill_memory(array.szplateau.y)) == NULL)
+		return (array);
+	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
+			return (array);
+	array.szpiece = getsize(line);
+	free(line);
+	if (array.szpiece.x == -1 || array.szpiece.y == -1)
+		return (array);
+	if ((array.piece = fill_memory(array.szpiece.y)) == NULL)
+		return (array);
+	return (array);
 }
