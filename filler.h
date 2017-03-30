@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/30 15:52:06 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/30 21:01:00 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_size
 int	fd; // globale !
 typedef struct
 {
+	char		j;
 	t_size		szplateau;
 	t_size		szpiece;
 	char		**piece;

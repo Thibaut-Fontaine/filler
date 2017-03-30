@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/30 20:49:02 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/30 21:01:38 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ t_array			parse_input()
 		return (array);
 	if ((array.piece = fill_memory(array.szpiece.y)) == NULL)
 		return (array);
+	array.j = j;
 	return (array);
 }

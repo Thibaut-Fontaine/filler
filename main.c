@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/30 20:47:20 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/30 21:18:46 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int			main()
 	t_array	array;
 
 	array = parse_input();
-	while (1)
-		ft_putstr("12 14\n");
+
+	//while (1)
+	//	ft_putstr("12 14\n");
 	return (0);
 }
