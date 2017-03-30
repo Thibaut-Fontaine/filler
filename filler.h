@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/30 15:44:42 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/30 15:52:06 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct	s_size
 	int			y;
 }				t_size;
 int	fd; // globale !
-int				parse_input(void);
-char			*getexecline(void);
 typedef struct
 {
 	t_size		szplateau;
@@ -38,5 +36,8 @@ typedef struct
 	char		**piece;
 	char		**plateau;
 }				t_array;
+
+t_array				parse_input(void);
+char			*getexecline(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 20:36:22 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/27 13:39:07 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/30 18:44:27 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <sys/uio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "./../libft/includes/libft.h"
+# include "./libft/includes/libft.h"
 
-# define BUFF_SIZE 50
+# define BUFF_SIZE 1
 # define S (((t_endl*)current->content)->s)
 
 int				get_next_line(const int fd, char **line);

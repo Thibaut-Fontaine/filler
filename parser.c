@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/30 15:49:25 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/30 20:49:02 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,9 @@ char			**fill_memory(size_t y)
 	ret = malloc((y + 1) * sizeof(char*));
 	k = 0;
 	while (y > k)
-	{
-		get_next_line(INPUT, &(ret[k]));
-		++k;
-	}
+		get_next_line(INPUT, &(ret[k++]));
 	ret[k] = NULL;
 	return (ret);
-}
-
-void	ggg(char **array) //
-{
-	while (*array != NULL)
-	{
-		dprintf(fd, "%s\n", *array);
-		array++;
-	}
 }
 
 t_array			parse_input()
@@ -128,7 +116,7 @@ t_array			parse_input()
 	if ((array.plateau = fill_memory(array.szplateau.y)) == NULL)
 		return (array);
 	if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-			return (array);
+		return (array);
 	array.szpiece = getsize(line);
 	free(line);
 	if (array.szpiece.x == -1 || array.szpiece.y == -1)
