@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/30 22:22:24 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/03/31 03:05:31 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct	s_size
 	int			x;
 	int			y;
 }				t_size;
-int	fd; // globale !
+
 typedef struct
 {
 	char		j;
@@ -39,6 +39,6 @@ typedef struct
 }				t_array;
 
 t_array			parse_input(t_array *array);
-char			*getexecline(void);
+int				solver(t_array t);
 
 #endif
