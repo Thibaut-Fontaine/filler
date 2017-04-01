@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/01 05:49:05 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/01 06:37:54 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int			delete_right(char **array, int *size)
 	i = 0;
 	while (array[i])
 	{
-		array[i][*size] = 0;
+		//array[i][*size] = 0; // probleme
 		++i;
 	}
 	--*size;
@@ -146,8 +146,8 @@ int			leftup_piece(t_array *t)
 		delete_left(t->piece, &(t->szpiece.x));
 	while (check_line(t->piece, t->szpiece.y - 1, t->j, t->szpiece.x) == 0)
 		delete_down(t->piece, &(t->szpiece.y));
-	while (check_column(t->piece, t->szpiece.x - 1, t->j, t->szpiece.y) == 0)
-		delete_right(t->piece, &(t->szpiece.x));
+	//while (check_column(t->piece, t->szpiece.x - 1, t->j, t->szpiece.y) == 0) // probleme pour la
+	//	delete_right(t->piece, &(t->szpiece.x));                                // suppression a droite
 	return (1);
 }
 
