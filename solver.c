@@ -6,13 +6,13 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/31 21:18:11 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/01 04:35:24 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./filler.h"
 
-check_place(t_array t, size_t y, size_t x)
+int			check_place(t_array t, size_t y, size_t x)
 {
 	size_t	k;
 	size_t	i;
@@ -29,6 +29,7 @@ check_place(t_array t, size_t y, size_t x)
 		}
 		++k;
 	}
+	return (0);
 }
 
 /*
@@ -36,14 +37,15 @@ check_place(t_array t, size_t y, size_t x)
 ** (colonnes allant de [0] a [y])
 */
 
-int			check_column(char **array, size_t column, char c)
+int			check_column(char **array, size_t column, char c, size_t size)
 {
 	size_t	i;
 
 	i = 0;
-	while (array[column] && array[i][column] != c)
+	--size;
+	while (i < size && array[i][column] != c)
 		++i;
-	return (array[i][column] == c);
+	return (i < size);
 }
 
 
@@ -52,14 +54,52 @@ int			check_column(char **array, size_t column, char c)
 ** (lignes allant de [0] a [x])
 */
 
-int			check_line(char **array, size_t line, char c)
+int			check_line(char **array, size_t line, char c, size_t size)
 {
 	size_t	i;
 
 	i = 0;
-	while (array[line][i] && array[line][i] != c)
+	while (i < size && array[line][i] != c)
 		++i;
-	return (array[line][i] == c);
+	return (i < size);
+}
+
+/*
+** decale le plus a gauche possible en supprimant le premier
+** caractere de chaque ligne
+*/
+
+int			delete_left(char **array, int *size)
+{
+	int		i;
+
+	i = 0;
+	while (array[i])
+	{
+		ft_memmove(array[i], array[i] + 1, *size);
+		++i;
+	}
+	--*size;
+	return (0);
+}
+
+/*
+** decale le plus en haut possible en supprimant la premiere ligne + free
+*/
+
+int			delete_up(char **array, int *size)
+{
+	int		i;
+
+	free(array[0]);
+	i = 0;
+	while (i < *size)
+	{
+		array[i] = array[i + 1];
+		++i;
+	}
+	--*size;
+	return (0);
 }
 
 /*
@@ -69,21 +109,11 @@ int			check_line(char **array, size_t line, char c)
 
 int			leftup_piece(t_array *t)
 {
-	size_t	y;
-	size_t	x;
-	
-	while (t->piece[y][x])
-	{
-	x = 0;
-	while (t->piece[y][x])
-	{
-		if (check_line(t->piece, y, t->j) == 0)
-			;
-		if (check_column(t->piece, x, t->j) == 0)
-			;
-		++x;
-	}
-	}
+	while (check_line(t->piece, 0, t->j, t->szpiece.x) == 0)
+			delete_up(t->piece, &(t->szpiece.y));
+	while (check_column(t->piece, 0, t->j, t->szpiece.y) == 0)
+			delete_left(t->piece, &(t->szpiece.x));
+	return (1);
 }
 
 int			solver(t_array t)
