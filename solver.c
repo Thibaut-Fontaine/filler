@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/01 04:35:24 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/01 05:49:05 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,24 @@ int			delete_left(char **array, int *size)
 }
 
 /*
+** remplace le dernier caractere de chaque ligne par un zero
+*/
+
+int			delete_right(char **array, int *size)
+{
+	int		i;
+
+	i = 0;
+	while (array[i])
+	{
+		array[i][*size] = 0;
+		++i;
+	}
+	--*size;
+	return (0);
+}
+
+/*
 ** decale le plus en haut possible en supprimant la premiere ligne + free
 */
 
@@ -103,6 +121,19 @@ int			delete_up(char **array, int *size)
 }
 
 /*
+** free et supprime la derniere ligne
+*/
+
+int			delete_down(char **array, int *size)
+{
+	free(array[*size - 1]);
+	array[*size - 1] = NULL;
+	--*size;
+	return (0);
+}
+
+
+/*
 ** decale la piece le plus en haut a gauche possible, tout en reduisant
 ** la taille szpiece a chaque decalage
 */
@@ -110,9 +141,13 @@ int			delete_up(char **array, int *size)
 int			leftup_piece(t_array *t)
 {
 	while (check_line(t->piece, 0, t->j, t->szpiece.x) == 0)
-			delete_up(t->piece, &(t->szpiece.y));
+		delete_up(t->piece, &(t->szpiece.y));
 	while (check_column(t->piece, 0, t->j, t->szpiece.y) == 0)
-			delete_left(t->piece, &(t->szpiece.x));
+		delete_left(t->piece, &(t->szpiece.x));
+	while (check_line(t->piece, t->szpiece.y - 1, t->j, t->szpiece.x) == 0)
+		delete_down(t->piece, &(t->szpiece.y));
+	while (check_column(t->piece, t->szpiece.x - 1, t->j, t->szpiece.y) == 0)
+		delete_right(t->piece, &(t->szpiece.x));
 	return (1);
 }
 
