@@ -6,13 +6,13 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/06 18:25:17 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/06 21:49:51 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./filler.h"
 
-/*int			check_place(t_array t, size_t y, size_t x)
+int			check_place(t_array t, size_t y, size_t x)
 {
 	size_t	k;
 	size_t	i;
@@ -30,7 +30,7 @@
 		++k;
 	}
 	return (0);
-}*/
+}
 
 /*
 ** verifie si le caractere specifie est present dans telle colonne d'un tableau
@@ -68,8 +68,12 @@ int			check_line(char **array, size_t line, char c, size_t size)
 	return (i < size);
 }
 
-/*int			solver(t_array t)
+t_size		solver(t_array *t)
 {
-	
-	return (0);
-}*/
+	t_size	r;
+
+	r.x = 0;
+	r.y = 0;
+	leftup_piece(t);
+	return (r);
+}
