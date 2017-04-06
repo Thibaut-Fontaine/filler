@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/03/31 01:38:13 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/06 18:07:44 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_size			getsize(const char *s)
 ** or return NULL if an error occured
 */
 
-char			**fill_memory(size_t y)
+char			**fill_memory(size_t y) // verifier si c'est la bonne taille
 {
 	char		**ret;
 	size_t		k;

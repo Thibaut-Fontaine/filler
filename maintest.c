@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 02:30:21 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/01 06:10:30 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/06 16:28:04 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		main(int argc, char *argv[])
 	array[2] = ft_strnew(10);
 	ft_strcpy(array[2], "..........");
 	array[3] = ft_strnew(10);
-	ft_strcpy(array[3], ".....O....");
+	ft_strcpy(array[3], "..........");
 	array[4] = ft_strnew(10);
 	ft_strcpy(array[4], "..........");
 	array[5] = ft_strnew(10);
@@ -48,7 +48,7 @@ int		main(int argc, char *argv[])
 	array[6] = ft_strnew(10);
 	ft_strcpy(array[6], "..........");
 	array[7] = ft_strnew(10);
-	ft_strcpy(array[7], "..........");
+	ft_strcpy(array[7], "....O.....");
 	array[8] = ft_strnew(10);
 	ft_strcpy(array[8], "...L0L....");
 	array[9] = NULL;
@@ -65,6 +65,7 @@ int		main(int argc, char *argv[])
 	//delete_right(t.piece, &(t.szpiece.x));
 	//
 	//
+	printf("ok\n");
 	printarray(t.piece, t.szpiece.y);
 	printf("==========\n");
 	return (0);
