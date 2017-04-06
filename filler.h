@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/06 16:44:38 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:20:58 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ typedef struct
 	char		**plateau;
 }				t_array;
 
+void			printarray(char **array); // a virer
 t_array			parse_input(t_array *array);
 int				solver(t_array t);
 int				check_column(char **array, size_t column, char c, size_t size);
 int				check_line(char **array, size_t line, char c, size_t size);
 int				leftup_piece(t_array *t);
+int				delete_left(char **array, int *size);
 
 #endif

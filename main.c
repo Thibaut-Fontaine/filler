@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/06 18:10:43 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/06 20:27:53 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,24 @@ void    printarray(char **array)
 	i = 0;
 	while (array[i])
 	{
-		dprintf(2, "%s\n", array[i]);
+		dprintf(2, "%s\n", array[i] + 4); // +4 pour lire le plateau
 		++i;
 	}
+	dprintf(2, "------------\n");
 }
 
 int				main()
 {
 	t_array		array;
 
-//	while (1)
-//	{
+	while (1)
+	{
 		parse_input(&array);
 		if ((array.piece == NULL || array.piece == NULL)
 				&& ft_putstr_fdr("0 0\n", 1))
-//			break ;
-		printarray(array.plateau);
-//	}
+		;
+		
+	}
 
 
 	//while (1)
