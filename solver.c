@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/07 18:44:28 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 19:19:30 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,23 @@ int			check_line(char **array, size_t line, char c, size_t size)
 	return (i < size);
 }
 
+/*
+** check if the t->piece can be placed on the t->plateau
+** at the y, x coordonates, or not. (return 1 for yes and 0 for no)
+*/
+
 int			check_place(t_array t, size_t y, size_t x)
 {
-	(void)t.szplateau.x;
-	(void)(y + x);
+	size_t	dy;
+	size_t	dx;
+	int		n;
+
+	n = 0;
+	if (t.plateau[y + dy][x + dx] == t.j && t.piece[dy][dx] == '*')
+		++n; // si un caractere est en commun, ++n
+	// METTRE TOUT CA DANS UNE BOUCLE
+	if (n == 1)
+		return (1); // si exactement une case est recouverte, alors return 1
 	return (0);
 }
 
@@ -61,8 +74,8 @@ t_size		solver(t_array *t)
 	r.y = 0;
 	if ((leftup_piece(t)) == -1)
 		return (r);
-	printarray(t->plateau);
-	printarray(t->piece);
-	//check_place(*t, 1, 1);
+	//printarray(t->plateau);
+	//printarray(t->piece);
+	check_place(*t, 1, 1);
 	return (r);
 }

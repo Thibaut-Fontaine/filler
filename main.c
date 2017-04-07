@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/07 18:25:07 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 18:55:01 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int				main()
 		parse_input(&t);
 		if ((t.piece == NULL || t.piece == NULL) && ft_putstr_fdr("0 0\n", 1))
 			break ;
-		decalleft(&t);
+		decalleft(&t); // decale t->plateau a gauche, pour free il faut redecaler a droite
 		to_write = solver(&t);
 	}
 
