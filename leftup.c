@@ -6,20 +6,20 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 16:41:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/06 20:13:26 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 04:11:41 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./filler.h"
 
 /*
- ** decale le plus a gauche possible en supprimant le premier
- ** caractere de chaque ligne
- */
+** decale le plus a gauche possible en supprimant le premier
+** caractere de chaque ligne
+*/
 
-int                     delete_left(char **array, int *size)
+int			delete_left(char **array, int *size)
 {
-	int             i;
+	int		i;
 
 	i = 0;
 	while (array[i])
@@ -32,12 +32,12 @@ int                     delete_left(char **array, int *size)
 }
 
 /*
- ** decale le plus en haut possible en supprimant la premiere ligne + free
- */
+** decale le plus en haut possible en supprimant la premiere ligne + free
+*/
 
-int                     delete_up(char **array, int *size)
+int			delete_up(char **array, int *size)
 {
-	int             i;
+	int		i;
 
 	free(array[0]);
 	i = 0;
@@ -51,10 +51,10 @@ int                     delete_up(char **array, int *size)
 }
 
 /*
- ** free et supprime la derniere ligne
- */
+** free et supprime la derniere ligne
+*/
 
-int                     delete_down(char **array, int *size)
+int			delete_down(char **array, int *size)
 {
 	free(array[*size - 1]);
 	array[*size - 1] = NULL;
@@ -62,27 +62,32 @@ int                     delete_down(char **array, int *size)
 	return (0);
 }
 
-
 /*
- ** decale la piece le plus en haut a gauche possible, tout en reduisant
- ** la taille szpiece a chaque decalage
- */
+** decale la piece le plus en haut a gauche possible, tout en reduisant
+** la taille szpiece a chaque decalage
+*/
 
-int                     leftup_piece(t_array *t)
+int			leftup_piece(t_array *t)
 {
-	int             r;
+	int		r;
 
-	while ((r = check_line(t->piece, 0, t->j, t->szpiece.x)) == 0)
+	r = 0;
+	while (r < t->szpiece.y)
+	{
+		if (ft_strnchr(t->piece[r], '*', t->szpiece.x))
+		{
+			r = -1;
+			break ;
+		}
+		++r;
+	}
+	if (r != -1)
+		return (-1);
+	while (check_line(t->piece, 0, '*', t->szpiece.x) == 0)
 		delete_up(t->piece, &(t->szpiece.y));
-	if (r == -1) // piece vide
-		return (-1);
-	while ((r = check_column(t->piece, 0, t->j, t->szpiece.y)) == 0)
+	while (check_column(t->piece, 0, '*', t->szpiece.y) == 0)
 		delete_left(t->piece, &(t->szpiece.x));
-	if (r == -1)
-		return (-1);
-	while ((r = check_line(t->piece, t->szpiece.y - 1, t->j, t->szpiece.x)) == 0)
+	while (check_line(t->piece, t->szpiece.y - 1, '*', t->szpiece.x) == 0)
 		delete_down(t->piece, &(t->szpiece.y));
-	if (r == -1)
-		return (-1);
 	return (1);
 }

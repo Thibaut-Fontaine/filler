@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/06 21:45:05 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 01:36:40 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct
 	char		**plateau;
 }				t_array;
 
+void			decalleft(t_array *t);
 void			printarray(char **array); // a virer
 t_array			parse_input(t_array *array);
 t_size			solver(t_array *t);

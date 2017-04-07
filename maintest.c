@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 02:30:21 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/06 16:28:04 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 04:12:51 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "./filler.h"
 
-void	printarray(char **array, int argc)
+void	printarray(char **array)
 {
 	int	i;
 
@@ -42,13 +42,13 @@ int		main(int argc, char *argv[])
 	array[3] = ft_strnew(10);
 	ft_strcpy(array[3], "..........");
 	array[4] = ft_strnew(10);
-	ft_strcpy(array[4], "..........");
+	ft_strcpy(array[4], ".......**.");
 	array[5] = ft_strnew(10);
 	ft_strcpy(array[5], "..........");
 	array[6] = ft_strnew(10);
 	ft_strcpy(array[6], "..........");
 	array[7] = ft_strnew(10);
-	ft_strcpy(array[7], "....O.....");
+	ft_strcpy(array[7], "..........");
 	array[8] = ft_strnew(10);
 	ft_strcpy(array[8], "...L0L....");
 	array[9] = NULL;
@@ -57,7 +57,7 @@ int		main(int argc, char *argv[])
 	t.szpiece.x = 10;
 	t.j = 'O';
 	printf("========== **array : \n");
-	printarray(t.piece, t.szpiece.y);
+	printarray(t.piece);
 	printf("==========\n");
 	printf("========== element supprime : \n");
 	//
@@ -66,7 +66,7 @@ int		main(int argc, char *argv[])
 	//
 	//
 	printf("ok\n");
-	printarray(t.piece, t.szpiece.y);
+	printarray(t.piece);
 	printf("==========\n");
 	return (0);
 }

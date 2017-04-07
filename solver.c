@@ -6,31 +6,11 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/06 21:49:51 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 04:11:01 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./filler.h"
-
-int			check_place(t_array t, size_t y, size_t x)
-{
-	size_t	k;
-	size_t	i;
-
-	k = 0;
-	while (k < t.szpiece.y)
-	{
-		i = 0;
-		while (i < t.szpiece.x)
-		{
-			if (ft_tolower(t.plateau[k][i]) == ft_tolower(t.j))
-				;
-			++i;
-		}
-		++k;
-	}
-	return (0);
-}
 
 /*
 ** verifie si le caractere specifie est present dans telle colonne d'un tableau
@@ -45,8 +25,6 @@ int			check_column(char **array, size_t column, char c, size_t size)
 	--size;
 	while (array[i][column] && i < size && array[i][column] != c)
 		++i;
-	if (array[i][column] == 0)
-		return (-1);
 	return (i < size);
 }
 
@@ -63,9 +41,14 @@ int			check_line(char **array, size_t line, char c, size_t size)
 	i = 0;
 	while (array[line][i] && i < size && array[line][i] != c)
 		++i;
-	if (array[line][i] == 0)
-		return (-1);
 	return (i < size);
+}
+
+int			check_place(t_array t, size_t y, size_t x)
+{
+	(void)t.szplateau.x;
+	(void)(y + x);
+	return (0);
 }
 
 t_size		solver(t_array *t)
@@ -74,6 +57,8 @@ t_size		solver(t_array *t)
 
 	r.x = 0;
 	r.y = 0;
-	leftup_piece(t);
+	dprintf(2, "%u %u\n", t->szpiece.x, t->szpiece.y);
+	printarray(t->piece);
+	//check_place(*t, 1, 1);
 	return (r);
 }
