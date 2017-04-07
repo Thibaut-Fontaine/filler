@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/07 04:26:37 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 18:44:28 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ int			check_column(char **array, size_t column, char c, size_t size)
 	size_t	i;
 
 	i = 0;
-	--size;
-	while (array[i][column] && i < size && array[i][column] != c)
+	while (array[i][column] && i < size)
+	{
+		if (array[i][column] == c)
+			return (1);
 		++i;
-	return (i < size);
+	}
+	return (0);
 }
-
 
 /*
 ** verifie si le caractere specifie est present dans telle ligne d'un tableau
@@ -57,7 +59,9 @@ t_size		solver(t_array *t)
 
 	r.x = 0;
 	r.y = 0;
-	leftup_piece(t);
+	if ((leftup_piece(t)) == -1)
+		return (r);
+	printarray(t->plateau);
 	printarray(t->piece);
 	//check_place(*t, 1, 1);
 	return (r);
