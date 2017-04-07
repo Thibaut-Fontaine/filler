@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/07 04:11:01 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 04:26:37 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_size		solver(t_array *t)
 
 	r.x = 0;
 	r.y = 0;
-	dprintf(2, "%u %u\n", t->szpiece.x, t->szpiece.y);
+	leftup_piece(t);
 	printarray(t->piece);
 	//check_place(*t, 1, 1);
 	return (r);
