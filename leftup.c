@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 16:41:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/07 18:44:40 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 20:59:52 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ int			delete_left(char **array, int *size)
 	int		i;
 
 	i = 0;
-	dprintf(2, "avant\n");
 	while (array[i])
 	{
 		ft_memmove(array[i], array[i] + 1, *size);
 		++i;
 	}
 	--*size;
-	dprintf(2, "apres\n");
 	return (0);
 }
 

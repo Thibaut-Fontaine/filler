@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/07 19:19:30 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/07 21:05:01 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,23 @@ int			check_line(char **array, size_t line, char c, size_t size)
 int			check_place(t_array t, size_t y, size_t x)
 {
 	size_t	dy;
-	size_t	dx;
+	size_t	dx; // segfault apparement
 	int		n;
 
 	n = 0;
-	if (t.plateau[y + dy][x + dx] == t.j && t.piece[dy][dx] == '*')
-		++n; // si un caractere est en commun, ++n
-	// METTRE TOUT CA DANS UNE BOUCLE
-	if (n == 1)
-		return (1); // si exactement une case est recouverte, alors return 1
-	return (0);
+	dy = 0;
+	while (dy < (size_t)t.szpiece.y)
+	{
+		dx = 0;
+		while (dx < (size_t)t.szpiece.x)
+		{
+			if (t.plateau[y + dy][x + dx] == t.j && t.piece[dy][dx] == '*')
+				++n; // si un caractere est en commun, ++n
+			++dx;
+		}
+		++dy;
+	}
+	return (n == 1);
 }
 
 t_size		solver(t_array *t)
@@ -75,7 +82,9 @@ t_size		solver(t_array *t)
 	if ((leftup_piece(t)) == -1)
 		return (r);
 	//printarray(t->plateau);
-	//printarray(t->piece);
-	check_place(*t, 1, 1);
+	printarray(t->piece);
+	r.x = 12;
+	r.y = 15; // segfault
+	dprintf(2, "can it be placed at y = %d && x = %d ? -|%d|-\n", r.y, r.x, check_place(*t, r.y, r.x));
 	return (r);
 }
