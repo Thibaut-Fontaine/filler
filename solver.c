@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/08 23:30:17 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/09 00:06:45 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			check_line(char **array, size_t line, char c, size_t size)
 ** at the y, x coordonates, or not. (return 1 for yes and 0 for no)
 */
 
-int			check_place(t_array *t, size_t y, size_t x)
+int			check_place(t_array t, size_t y, size_t x)
 {
 	int		n;
 	int		dy;
@@ -60,12 +60,12 @@ int			check_place(t_array *t, size_t y, size_t x)
 	--x;
 	dy = 0;
 	n = 0;
-	while (dy < t->szpiece.y)
+	while (dy < t.szpiece.y)
 	{
 		dx = 0;
-		while (dx < t->szpiece.x)
+		while (dx < t.szpiece.x) // checker si on depasse pas le plateau
 		{
-			if (t->plateau[y + dy][x + dx] == t->j && t->piece[dy][dx] == '*')
+			if (t.plateau[y + dy][x + dx] == t.j && t.piece[dy][dx] == '*')
 				++n;
 			++dx;
 		}
@@ -82,11 +82,17 @@ t_size		solver(t_array *t)
 	r.y = 0;
 	if ((leftup_piece(t)) == -1)
 		return (r);
-	r.x = 15;
-	r.y = 12; // segfault
-	dprintf(2, "|%c|\n", t->j);
-	dprintf(2, "can it be placed at y = %d && x = %d ? -|%d|-\n", r.y, r.x, check_place(t, r.y, r.x));
-	printarray(t->plateau);
-	printarray(t->piece);
+	r.y = 0;
+	while (r.y < t->szplateau.y)
+	{
+		r.x = 0;
+		while (r.x < t->szplateau.x)
+		{
+			if (check_place(*t, r.y, r.x) == 1)
+				; // alors r.y et r.x sont des coordonnees viables
+			++r.x;
+		}
+		++r.y;
+	}
 	return (r);
 }
