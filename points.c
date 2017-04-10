@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 11:29:19 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 15:51:01 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 16:30:42 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,30 @@ t_list		*fill_points(char **array, char c)
 ** to get the two nearest points
 */
 
-reach_nearest(t_array t, t_list *adv)
+t_ssize		reach_nearest(t_array t, t_list *adv)
 {
 	t_list	*pla;
 	float	dist;
+	float	tmp;
+	t_list	*hadv;
+	t_ssize	ret;
 
 	pla = fill_points(t.plateau, t.j);
+	hadv = adv;
 	while (pla != NULL)
 	{
-		dist = distance(*(t_size*)(pla->content), *(t_size*)(adv->content));
-		
+		adv = hadv;
+		while (adv != NULL)
+		{
+			if (dist > (tmp = distance(*(t_size*)pla->content, *(t_size*)adv->content)))
+			{
+				ret.a = *(t_size*)pla->content;
+				ret.b = *(t_size*)adv->content;
+				dist = tmp;
+			}
+			adv = adv->next;
+		}
+		pla = pla->next;
 	}
+	return (ret);
 }

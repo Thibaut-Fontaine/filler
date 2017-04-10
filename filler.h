@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 08:27:55 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 16:05:03 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ typedef union
 	float		x;
 	int			i;
 }				t_sqrt;
+
+typedef struct
+{
+	t_size		a;
+	t_size		b;
+}				t_ssize;
 
 void			decalleft(t_array *t);
 void			printarray(char **array); // a virer
