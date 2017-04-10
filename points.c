@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 11:29:19 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 16:30:42 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 16:35:25 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ t_list		*fill_points(char **array, char c)
 
 /*
 ** compare all the enemy points and the coordonates where we can place
-** to get the two nearest points
+** to get the two nearest points, then return the player's one.
 */
 
-t_ssize		reach_nearest(t_array t, t_list *adv)
+t_size		reach_nearest(t_array t, t_list *adv)
 {
 	t_list	*pla;
 	float	dist;
 	float	tmp;
 	t_list	*hadv;
-	t_ssize	ret;
+	t_size	ret;
 
 	pla = fill_points(t.plateau, t.j);
 	hadv = adv;
@@ -69,8 +69,7 @@ t_ssize		reach_nearest(t_array t, t_list *adv)
 		{
 			if (dist > (tmp = distance(*(t_size*)pla->content, *(t_size*)adv->content)))
 			{
-				ret.a = *(t_size*)pla->content;
-				ret.b = *(t_size*)adv->content;
+				ret = *(t_size*)pla->content;
 				dist = tmp;
 			}
 			adv = adv->next;
