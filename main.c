@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 04:54:52 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 05:14:04 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-void		printarray(char **array)
+void			printarray(char **array) // a virer
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (array[i])
 	{
-		dprintf(2, "%s\n", array[i]); // +4 pour lire le plateau
+		dprintf(2, "%s\n", array[i]);
 		++i;
 	}
 	dprintf(2, "- - - - - - - - - - - -\n");
 }
 
-int			send_response(int y, int x)
+int				send_response(int y, int x)
 {
-	int		ret;
+	int			ret;
 
 	ret = ft_putnbr_fdr(y, OUTPUT);
 	ret += ft_putchar_fdr(' ', OUTPUT);
@@ -39,7 +39,7 @@ int			send_response(int y, int x)
 	return (ret);
 }
 
-int				main()
+int				main(void)
 {
 	t_array		t;
 	t_size		to_write;
@@ -49,13 +49,9 @@ int				main()
 		parse_input(&t);
 		if ((t.piece == NULL || t.piece == NULL) && ft_putstr_fdr("0 0\n", 1))
 			break ;
-		decalleft(&t); // decale t->plateau a gauche, pour free il faut redecaler a droite
+		decalleft(&t); // pour free il faut redecaler a droite
 		to_write = solver(&t);
 		send_response(to_write.y, to_write.x);
 	}
-
-
-	//while (1)
-	//	ft_putstr("12 14\n");
 	return (0);
 }

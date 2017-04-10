@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 16:41:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 04:24:34 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 05:12:14 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,8 @@ t_size		leftup_piece(t_array *t)
 {
 	int		r;
 	t_size	decal;
-	decal.x = -1;
-	decal.y = -1;
 
+	decal.x = -1;
 	r = 0;
 	while (r < t->szpiece.y)
 	{
