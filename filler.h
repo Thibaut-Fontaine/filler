@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 04:20:37 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 08:27:55 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct
 	char		**plateau;
 }				t_array;
 
+typedef union
+{
+	float		x;
+	int			i;
+}				t_sqrt;
+
 void			decalleft(t_array *t);
 void			printarray(char **array); // a virer
 t_array			parse_input(t_array *array);
@@ -49,5 +55,6 @@ t_size			leftup_piece(t_array *t);
 int				delete_left(char **array, int *size);
 int				send_response(int y, int x);
 int				check_place(t_array t, size_t y, size_t x);
+float			distance(t_size a, t_size b);
 
 #endif
