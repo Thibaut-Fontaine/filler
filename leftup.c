@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 16:41:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/07 20:59:52 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 04:24:34 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			delete_left(char **array, int *size)
 		++i;
 	}
 	--*size;
-	return (0);
+	return (1);
 }
 
 /*
@@ -47,7 +47,7 @@ int			delete_up(char **array, int *size)
 		++i;
 	}
 	--*size;
-	return (0);
+	return (1);
 }
 
 /*
@@ -59,17 +59,21 @@ int			delete_down(char **array, int *size)
 	free(array[*size - 1]);
 	array[*size - 1] = NULL;
 	--*size;
-	return (0);
+	return (1);
 }
 
 /*
 ** decale la piece le plus en haut a gauche possible, tout en reduisant
 ** la taille szpiece a chaque decalage
+** return le decalage effectue.
 */
 
-int			leftup_piece(t_array *t)
+t_size		leftup_piece(t_array *t)
 {
 	int		r;
+	t_size	decal;
+	decal.x = -1;
+	decal.y = -1;
 
 	r = 0;
 	while (r < t->szpiece.y)
@@ -82,12 +86,14 @@ int			leftup_piece(t_array *t)
 		++r;
 	}
 	if (r != -1)
-		return (-1);
+		return (decal);
+	decal.x = 0;
+	decal.y = 0;
 	while (check_line(t->piece, 0, '*', t->szpiece.x) == 0)
-		delete_up(t->piece, &(t->szpiece.y));
+		++decal.y && delete_up(t->piece, &(t->szpiece.y));
 	while (check_column(t->piece, 0, '*', t->szpiece.y) == 0)
-		delete_left(t->piece, &(t->szpiece.x));
+		++decal.x && delete_left(t->piece, &(t->szpiece.x));
 	while (check_line(t->piece, t->szpiece.y - 1, '*', t->szpiece.x) == 0)
 		delete_down(t->piece, &(t->szpiece.y));
-	return (1);
+	return (decal);
 }

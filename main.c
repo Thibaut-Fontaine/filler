@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/07 18:55:01 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 04:54:52 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ void		printarray(char **array)
 	dprintf(2, "- - - - - - - - - - - -\n");
 }
 
+int			send_response(int y, int x)
+{
+	int		ret;
+
+	ret = ft_putnbr_fdr(y, OUTPUT);
+	ret += ft_putchar_fdr(' ', OUTPUT);
+	ret += ft_putnbr_fdr(x, OUTPUT);
+	ret += ft_putchar_fdr('\n', OUTPUT);
+	return (ret);
+}
+
 int				main()
 {
 	t_array		t;
@@ -40,6 +51,7 @@ int				main()
 			break ;
 		decalleft(&t); // decale t->plateau a gauche, pour free il faut redecaler a droite
 		to_write = solver(&t);
+		send_response(to_write.y, to_write.x);
 	}
 
 

@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/07 01:36:40 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 04:20:37 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include "./libft/includes/libft.h"
 # include "./get_next_line.h"
 
-# define INPUT 0 // mettre 0
+# define INPUT 0
+# define OUTPUT 1
 
 typedef struct	s_size
 {
@@ -44,7 +45,9 @@ t_array			parse_input(t_array *array);
 t_size			solver(t_array *t);
 int				check_column(char **array, size_t column, char c, size_t size);
 int				check_line(char **array, size_t line, char c, size_t size);
-int				leftup_piece(t_array *t);
+t_size			leftup_piece(t_array *t);
 int				delete_left(char **array, int *size);
+int				send_response(int y, int x);
+int				check_place(t_array t, size_t y, size_t x);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/09 00:06:45 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/10 04:59:13 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,27 @@ int			check_place(t_array t, size_t y, size_t x)
 	int		n;
 	int		dy;
 	int		dx;
+	char	adv;
 
-	--x;
+	adv = t.j == 'O' ? 'X' : 'O';
 	dy = 0;
 	n = 0;
 	while (dy < t.szpiece.y)
 	{
+		if (t.plateau[y + dy] == NULL)
+			return (0);
 		dx = 0;
-		while (dx < t.szpiece.x) // checker si on depasse pas le plateau
+		while (dx < t.szpiece.x)
 		{
-			if (t.plateau[y + dy][x + dx] == t.j && t.piece[dy][dx] == '*')
-				++n;
+			if (t.plateau[y + dy][x + dx] == 0)
+				return (0);
+			if (t.piece[dy][dx] == '*')
+			{
+				if (t.plateau[y + dy][x + dx] == t.j)
+					++n;
+				else if (t.plateau[y + dy][x + dx] == adv)
+					return (0);
+			}
 			++dx;
 		}
 		++dy;
@@ -74,25 +84,38 @@ int			check_place(t_array t, size_t y, size_t x)
 	return (n == 1);
 }
 
+/*
+** for each case, test if the piece can be placed at these coordonates.
+** return the best ones.
+*/
+
 t_size		solver(t_array *t)
 {
 	t_size	r;
+	t_size	ret;
+	t_size	decal;
 
-	r.x = 0;
+	ret.y = 0;
+	ret.x = 0;
+	decal = leftup_piece(t);
+	if (decal.x == -1 || decal.y == -1)
+		return (ret);
 	r.y = 0;
-	if ((leftup_piece(t)) == -1)
-		return (r);
-	r.y = 0;
-	while (r.y < t->szplateau.y)
+	while (r.y < t->szplateau.y && t->plateau[r.y])
 	{
 		r.x = 0;
-		while (r.x < t->szplateau.x)
+		while (r.x < t->szplateau.x && t->plateau[r.y][r.x])
 		{
 			if (check_place(*t, r.y, r.x) == 1)
-				; // alors r.y et r.x sont des coordonnees viables
+			{
+				ret.y = r.y; // ret.y && ret.x become the new "best" piece
+				ret.x = r.x;
+			}
 			++r.x;
 		}
 		++r.y;
 	}
-	return (r);
+	ret.x -= decal.x;
+	ret.y -= decal.y;
+	return (ret);
 }
