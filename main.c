@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/11 21:02:35 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 21:47:16 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ int				main(void)
 		}
 		send_response(to_write.y, to_write.x);
 		// il faut free la piece et le tableau.
+		decalright(&t);
+		freearray(t.plateau, t.szplateau);
+		freearray(t.piece, t.szpiece);
+		dprintf(2, "salutiii\n");
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/11 20:45:07 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 21:47:11 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef union
 }				t_sqrt;
 
 void			decalleft(t_array *t);
+void			decalright(t_array *t);
 void			printarray(char **array); // a virer
 t_array			parse_input(t_array *array);
 t_list			*solver(t_array *t);
@@ -58,5 +59,6 @@ int				check_place(t_array t, size_t y, size_t x);
 float			distance(t_size a, t_size b);
 t_size			reach_nearest(t_array t, t_list *adv);
 t_list			*fill_points(char **array, char c);
+int				freearray(char **array, t_size sz);
 
 #endif
