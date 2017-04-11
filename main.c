@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/11 20:58:19 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 21:02:35 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int				main(void)
 			to_write.x = 0;
 			to_write.y = 0;
 		}
-		dprintf(2, "%d %d\n", to_write.y, to_write.x);
 		send_response(to_write.y, to_write.x);
 		// il faut free la piece et le tableau.
 	}

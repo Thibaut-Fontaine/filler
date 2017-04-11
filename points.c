@@ -6,11 +6,32 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 11:29:19 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/11 20:56:50 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 21:20:34 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./filler.h"
+
+/*
+** free() the lists
+*/
+
+int			freelist(t_list **h)
+{
+	t_list	*current;
+	t_list	*next;
+
+	current = *h;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current->content);
+		free(current);
+		current = next;
+	}
+	*h = NULL;
+	return (1);
+}
 
 /*
 ** get all the points of the ennemy into a structure
@@ -63,12 +84,18 @@ t_size		reach_nearest(t_array t, t_list *pla)
 	t_size	ret;
 
 	adv = fill_points(t.plateau, t.j == 'O' ? 'X' : 'O');
-	hadv = adv; // to free
-	hpla = pla; // to free
+	hadv = adv;
+	hpla = pla;
 	ret.x = -666;
 	ret.y = -666;
 	if (pla == NULL || adv == NULL)
+	{
+		if (pla == NULL)
+			freelist(&hpla);
+		if (adv == NULL)
+			freelist(&hadv);
 		return (ret);
+	}
 	dist = 99999999;
 	while (pla != NULL)
 	{
@@ -85,6 +112,6 @@ t_size		reach_nearest(t_array t, t_list *pla)
 		}
 		pla = pla->next;
 	}
-	// il faut free hadv et hpla !
+	freelist(&hadv) && freelist(&hpla);
 	return (ret);
 }
