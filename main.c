@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:19:50 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 07:46:32 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:35:24 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int				main(void)
 		decalleft(&t); // pour free il faut redecaler a droite
 		to_write = solver(&t);
 		send_response(to_write.y, to_write.x);
+		// il faut free la piece et le tableau.
 	}
 	return (0);
 }

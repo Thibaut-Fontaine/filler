@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 16:34:02 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:43:21 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ int				delete_left(char **array, int *size);
 int				send_response(int y, int x);
 int				check_place(t_array t, size_t y, size_t x);
 float			distance(t_size a, t_size b);
+t_size			reach_nearest(t_array t, t_list *adv);
+t_list			*fill_points(char **array, char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 07:54:54 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 10:35:01 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 18:23:06 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ float			q_sqrt(const float x)
 
 float			distance(t_size a, t_size b)
 {
-	const int d1 = a.x - b.x;
-	const int d2 = a.y - b.y;
+	const int d1 = b.x - a.x;
+	const int d2 = b.y - a.y;
 
 	return (q_sqrt(d1 * d1 + d2 * d2));
 }

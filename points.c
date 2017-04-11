@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 11:29:19 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 16:35:25 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 18:59:53 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,18 @@ t_size		reach_nearest(t_array t, t_list *adv)
 	t_size	ret;
 
 	pla = fill_points(t.plateau, t.j);
+	// il faut free les deux listes chainees
 	hadv = adv;
+	dist = 999999999;
 	while (pla != NULL)
 	{
 		adv = hadv;
 		while (adv != NULL)
 		{
-			if (dist > (tmp = distance(*(t_size*)pla->content, *(t_size*)adv->content)))
+			if (dist > (tmp = distance(*((t_size*)pla->content),
+							*((t_size*)adv->content))))
 			{
-				ret = *(t_size*)pla->content;
+				ret = *((t_size*)pla->content);
 				dist = tmp;
 			}
 			adv = adv->next;
