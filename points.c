@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 11:29:19 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/11 21:20:34 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 22:29:15 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_list		*fill_points(char **array, char c)
 /*
 ** compare all the enemy points and the coordonates where we can place
 ** to get the two nearest points, then return the player's one.
+** if the player already touch the ennemy, it will play to the rightest place
 ** return -666 && -666 if one of the list == NULL (means error)
 */
 
@@ -105,7 +106,9 @@ t_size		reach_nearest(t_array t, t_list *pla)
 			if (dist > (tmp = distance(*((t_size*)pla->content),
 							*((t_size*)adv->content))))
 			{
-				ret = *((t_size*)pla->content);
+				if (dist > 1 || ret.x == -666 ||
+						((t_size*)pla->content)->x > ret.x)
+					ret = *((t_size*)pla->content);
 				dist = tmp;
 			}
 			adv = adv->next;
@@ -115,3 +118,7 @@ t_size		reach_nearest(t_array t, t_list *pla)
 	freelist(&hadv) && freelist(&hpla);
 	return (ret);
 }
+
+/*
+** note : remove the second most left 'if' to only play at the nearest
+*/
