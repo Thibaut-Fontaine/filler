@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/11 18:34:47 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 20:46:56 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,24 @@ int			check_place(t_array t, size_t y, size_t x)
 ** return the best ones.
 */
 
-t_size		solver(t_array *t)
+t_list		*solver(t_array *t)
 {
 	t_size	r;
 	t_size	ret;
 	t_size	decal;
+	t_list	*h;
+	t_list	*c;
 
 	ret.y = 0;
 	ret.x = 0;
+
 	decal = leftup_piece(t);
 	if (decal.x == -1 || decal.y == -1)
-		return (ret);
+		return (NULL);
+	//
+	h = ft_lstnew(&ret, sizeof(t_size));
+	c = h;
+	//
 	r.y = 0;
 	while (r.y < t->szplateau.y && t->plateau[r.y])
 	{
@@ -110,10 +117,16 @@ t_size		solver(t_array *t)
 			{
 				ret.y = r.y - decal.y; // ret become the new "best" piece
 				ret.x = r.x - decal.x; // remplir une liste avec tout
+				c->next = ft_lstnew(&ret, sizeof(t_size));
+				c = c->next;
 			}
 			++r.x;
 		}
 		++r.y;
 	}
-	return (ret);
+	c = h;
+	h = h->next;
+	free(c->content);
+	free(c);
+	return (h);
 }
