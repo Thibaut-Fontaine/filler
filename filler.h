@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 11:20:10 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/11 21:47:11 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/11 21:49:24 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef union
 
 void			decalleft(t_array *t);
 void			decalright(t_array *t);
-void			printarray(char **array); // a virer
 t_array			parse_input(t_array *array);
 t_list			*solver(t_array *t);
 int				check_column(char **array, size_t column, char c, size_t size);
