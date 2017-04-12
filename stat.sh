@@ -6,15 +6,15 @@
 #    By: tfontain <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/11 23:38:53 by tfontain          #+#    #+#              #
-#    Updated: 2017/04/12 00:20:52 by tfontain         ###   ########.fr        #
+#    Updated: 2017/04/12 04:36:28 by tfontain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 player1=carli.filler
 player2=tfontain.filler
 
-n_turns=20
-map=01
+n_turns=10
+map=00
 
 # dont touch after this line --------------------------------------------------
 
@@ -36,7 +36,6 @@ do
 	((n_turns--))
 done
 
-echo $result
 echo $player1
 echo $p1
 echo $player2
