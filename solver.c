@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/12 06:38:09 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/12 22:54:53 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,11 @@ t_list		*solver(t_array *t)
 
 	ret.y = 0;
 	ret.x = 0;
-
 	decal = leftup_piece(t);
 	if (decal.x == -1 || decal.y == -1)
 		return (NULL);
-	//
 	h = ft_lstnew(&ret, sizeof(t_size));
 	c = h;
-	//
 	r.y = 0;
 	while (r.y < t->szplateau.y && t->plateau[r.y])
 	{

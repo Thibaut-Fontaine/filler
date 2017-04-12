@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 11:29:19 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/11 22:29:15 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/12 23:38:28 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ t_list		*fill_points(char **array, char c)
 	t_list	*head;
 	t_size	z;
 
-	z.y = 0;
-	z.x = 0;
-	head = ft_lstnew(&z, sizeof(t_size));
-	o = head;
+	i(&(z.y), 0) && i(&(z.x), 0) && l(&head, ft_lstnew(&z, sizeof(t_size)))
+		&& l(&o, head);
 	while (array[z.y])
 	{
 		z.x = 0;
@@ -75,48 +73,59 @@ t_list		*fill_points(char **array, char c)
 ** return -666 && -666 if one of the list == NULL (means error)
 */
 
-t_size		reach_nearest(t_array t, t_list *pla)
+void		rightest_only(float *dist, t_size *ret, t_size pla, float tmp)
+{
+	if (*dist > 1 || ret->x == -666 ||
+			pla.x > ret->x)
+	{
+		*ret = pla;
+		*dist = tmp;
+	}
+}
+
+t_size		reachn(t_list **hpla, t_list **hadv, t_size ret)
 {
 	float	dist;
 	float	tmp;
 	t_list	*adv;
-	t_list	*hadv;
-	t_list	*hpla;
+	t_list	*pla;
+
+	adv = *hadv;
+	pla = *hpla;
+	dist = 99999999;
+	while (pla != NULL)
+	{
+		adv = *hadv;
+		while (adv != NULL)
+		{
+			if (dist > (tmp = distance(*((t_size*)pla->content),
+							*((t_size*)adv->content))))
+				rightest_only(&dist, &ret, *((t_size*)pla->content), tmp);
+			adv = adv->next;
+		}
+		pla = pla->next;
+	}
+	freelist(hadv) && freelist(hpla);
+	return (ret);
+}
+
+t_size		reach_nearest(t_array t, t_list *pla)
+{
+	t_list	*adv;
 	t_size	ret;
 
 	adv = fill_points(t.plateau, t.j == 'O' ? 'X' : 'O');
-	hadv = adv;
-	hpla = pla;
 	ret.x = -666;
 	ret.y = -666;
 	if (pla == NULL || adv == NULL)
 	{
 		if (pla == NULL)
-			freelist(&hpla);
+			freelist(&pla);
 		if (adv == NULL)
-			freelist(&hadv);
+			freelist(&adv);
 		return (ret);
 	}
-	dist = 99999999;
-	while (pla != NULL)
-	{
-		adv = hadv;
-		while (adv != NULL)
-		{
-			if (dist > (tmp = distance(*((t_size*)pla->content),
-							*((t_size*)adv->content))))
-			{
-				if (dist > 1 || ret.x == -666 ||
-						((t_size*)pla->content)->x > ret.x)
-					ret = *((t_size*)pla->content);
-				dist = tmp;
-			}
-			adv = adv->next;
-		}
-		pla = pla->next;
-	}
-	freelist(&hadv) && freelist(&hpla);
-	return (ret);
+	return (reachn(&pla, &adv, ret));
 }
 
 /*
