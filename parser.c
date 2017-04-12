@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:14:48 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/10 05:35:07 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/12 21:19:16 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_size			getsize(const char *s)
 ** or return NULL if an error occured
 */
 
-char			**fill_memory(size_t y) // verifier si c'est la bonne taille
+char			**fill_memory(size_t y)
 {
 	char		**ret;
 	size_t		k;
@@ -88,7 +88,7 @@ char			**fill_memory(size_t y) // verifier si c'est la bonne taille
 	return (ret);
 }
 
-t_array			parse_input(t_array *array)
+char			*start(t_array *array)
 {
 	char		*line;
 	int			ret;
@@ -96,14 +96,24 @@ t_array			parse_input(t_array *array)
 	array->plateau = NULL;
 	array->piece = NULL;
 	if ((line = getexecline()) == NULL)
-		return (*array);
+		return (NULL);
 	else if (*line == 'O' || *line == 'X')
 	{
 		array->j = *line;
 		free(line);
 		if ((ret = get_next_line(INPUT, &line)) == -1 || ret == 0)
-			return (*array);
+			return (NULL);
 	}
+	return (line);
+}
+
+t_array			parse_input(t_array *array)
+{
+	char		*line;
+	int			ret;
+
+	if ((line = start(array)) == NULL)
+		return (*array);
 	array->szplateau = getsize(line);
 	free(line);
 	if (array->szplateau.x == -1 || array->szplateau.y == -1)
