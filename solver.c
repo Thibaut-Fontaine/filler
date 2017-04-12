@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/11 20:46:56 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/12 06:38:09 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ t_list		*solver(t_array *t)
 		{
 			if (check_place(*t, r.y, r.x) == 1)
 			{
-				ret.y = r.y - decal.y; // ret become the new "best" piece
-				ret.x = r.x - decal.x; // remplir une liste avec tout
+				ret.y = r.y - decal.y;
+				ret.x = r.x - decal.x;
 				c->next = ft_lstnew(&ret, sizeof(t_size));
 				c = c->next;
 			}
