@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/13 02:09:44 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/13 03:04:04 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,28 @@ int			check_line(char **array, size_t line, char c, size_t size)
 int			check_place(t_array t, size_t y, size_t x)
 {
 	int		n;
-	int		dy;
-	int		dx;
+	t_size	d;
 	char	adv;
 
-	adv = t.j == 'O' ? 'X' : 'O';
-	dy = 0;
-	n = 0;
-	while (dy < t.szpiece.y)
+	i(&(d.y), 0) && i(&n, 0) && i((int*)&adv, t.j == 'O' ? 'X' : 'O');
+	while (d.y < t.szpiece.y)
 	{
-		if (t.plateau[y + dy] == NULL)
+		if ((d.x = 0) == 0 && t.plateau[y + d.y] == NULL)
 			return (0);
-		dx = 0;
-		while (dx < t.szpiece.x)
+		while (d.x < t.szpiece.x)
 		{
-			if (t.plateau[y + dy][x + dx] == 0)
+			if (t.plateau[y + d.y][x + d.x] == 0)
 				return (0);
-			if (t.piece[dy][dx] == '*')
+			if (t.piece[d.y][d.x] == '*')
 			{
-				if (t.plateau[y + dy][x + dx] == t.j)
+				if (t.plateau[y + d.y][x + d.x] == t.j)
 					++n;
-				else if (t.plateau[y + dy][x + dx] == adv)
+				else if (t.plateau[y + d.y][x + d.x] == adv)
 					return (0);
 			}
-			++dx;
+			++d.x;
 		}
-		++dy;
+		++d.y;
 	}
 	return (n == 1);
 }
