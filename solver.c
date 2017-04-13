@@ -6,7 +6,7 @@
 /*   By: tfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 01:29:47 by tfontain          #+#    #+#             */
-/*   Updated: 2017/04/12 22:54:53 by tfontain         ###   ########.fr       */
+/*   Updated: 2017/04/13 02:09:44 by tfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,36 +89,41 @@ int			check_place(t_array t, size_t y, size_t x)
 ** return the best ones.
 */
 
+int			lineplateau(t_size *r, t_list **c, t_size decal, t_array *t)
+{
+	t_size	tmp;
+
+	while (r->x < t->szplateau.x && t->plateau[r->y][r->x])
+	{
+		if (check_place(*t, r->y, r->x) == 1)
+		{
+			tmp.y = r->y - decal.y;
+			tmp.x = r->x - decal.x;
+			(*c)->next = ft_lstnew(&tmp, sizeof(t_size));
+			*c = (*c)->next;
+		}
+		++r->x;
+	}
+	return (1);
+}
+
 t_list		*solver(t_array *t)
 {
 	t_size	r;
-	t_size	ret;
 	t_size	decal;
 	t_list	*h;
 	t_list	*c;
 
-	ret.y = 0;
-	ret.x = 0;
 	decal = leftup_piece(t);
 	if (decal.x == -1 || decal.y == -1)
 		return (NULL);
-	h = ft_lstnew(&ret, sizeof(t_size));
+	h = ft_lstnew(NULL, sizeof(t_size));
 	c = h;
 	r.y = 0;
 	while (r.y < t->szplateau.y && t->plateau[r.y])
 	{
 		r.x = 0;
-		while (r.x < t->szplateau.x && t->plateau[r.y][r.x])
-		{
-			if (check_place(*t, r.y, r.x) == 1)
-			{
-				ret.y = r.y - decal.y;
-				ret.x = r.x - decal.x;
-				c->next = ft_lstnew(&ret, sizeof(t_size));
-				c = c->next;
-			}
-			++r.x;
-		}
+		lineplateau(&r, &c, decal, t);
 		++r.y;
 	}
 	c = h;
